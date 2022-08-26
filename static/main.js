@@ -15,6 +15,6 @@ async function getGuildAvatar(guildID, iconID) {
 
 window.onload = async function() {
     const iconId = Deno.env.get("GUILD_ICON") ?? ""
-    let guildImageURL = await getGuildAvatar("574287921717182505", iconId);
+    let guildImageURL = await getGuildAvatar(Deno.env.get("GUILD_ID") ?? "", iconId);
     document.getElementById("guild-icon").setAttribute("src", guildImageURL);
 }
