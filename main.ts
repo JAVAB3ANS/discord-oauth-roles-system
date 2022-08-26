@@ -21,8 +21,8 @@ const OAUTH_AUTH = `oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${OAUTH
 const OAUTH_TOKEN = "oauth2/token"
 
 const GUILD_INFO = {
-    id: !TEST_GUILD ? "574287921717182505" : "696781447444299826",
-    icon: "a_5addd83a4328a1a9772c53d1e6c18978"
+    id: !TEST_GUILD ? "709118412542050364" : "696781447444299826",
+    icon: Deno.env.get("GUILD_ICON") ?? ""
 }
 
 const restrictedRegex = /(server|Student ✅|@everyone|Admin|Mod|Bots 🤖|SCU BOT ▶ &help|)/i
