@@ -1,0 +1,157 @@
+body {
+    color: #DDD;
+    background-color:  #222;
+    font-family: 'Montserrat', sans-serif;
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version */
+
+    cursor: default;
+
+    /*noinspection CssInvalidFunction*/
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Alata', sans-serif;
+}
+
+hr {
+    border-color: #DDD
+}
+
+img {
+    -webkit-user-drag: none; 
+}
+
+/* secondary gray = #383838 (headers), #303030 (body) */
+
+.section {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.card {
+    border-radius: 0;
+    border: none;
+    margin-bottom: 5px;
+}
+
+.card .card-header {
+    background-color: #363636;
+}
+
+.card .card-header .btn {
+    color: #DDD;
+    padding-left: 5px;
+}
+
+.card .card-header .btn:hover {
+    color: #FFF;
+    text-decoration: underline;
+}
+
+.card .card-body {
+    background-color: #2C2C2C;
+}
+
+.heading-block {
+    display: flex;
+    align-items: center; /* align vertical */
+}
+
+.heading-text {
+    display: inline-block;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: .5rem;
+}
+
+.heading-img {
+    display: inline-block;
+    height: 40px;
+}
+
+#guild-icon {
+    display: block;
+    height: 100px;
+    margin-bottom: 1rem;
+}
+
+.role {
+    color: #FFF;
+
+    display: inline-block;
+    padding: 3px 8px 1px 8px;
+
+    margin-right: 2px;
+    margin-bottom: 5px;
+
+    border: 1px solid red;
+    border-radius: 25px;
+}
+
+.role:not(.restricted):hover {
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    box-shadow: 0 0 10px 1px #1A1A1A;
+    border-radius: 8px;
+    font-family: 'Alata', sans-serif;
+}
+
+#nav {
+    margin: 2rem;
+}
+
+#privacy {
+    margin-top: 4rem;
+    font-size: 14px;
+}
+
+#controls {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+#avatar-icon {
+    margin-right: 0.5rem;
+}
+
+#login-button {
+    background-color: #b30738;
+    border-radius: 15px;
+    box-shadow: 3px 3px 3px #862633;
+}
+
+#login-button:hover {
+    background-color: #cb1f21;
+}
+
+#login-button:active {
+    background-color: #862633;
+    box-shadow: none;
+}
+
+#login-button img {
+    max-height: 60px;
+}
+
+#logout-triangle {
+    margin-left: 1rem
+}
+
+#user-block:hover {
+    cursor: pointer;
+}
+
+/* Blurple: #7289DA */
+
+@media only screen and (min-width: 450px) {
+    #privacy {
+        max-width: 70%;
+    }
+}
