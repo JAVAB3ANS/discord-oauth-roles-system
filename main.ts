@@ -5,8 +5,7 @@ const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 const app = new Application()
 const router = new Router()
 
-const DEBUG = false
-const TEST_GUILD = false
+const DEBUG = false  // set to true to enable debug mode
 
 const DISCORD_API = "https://discord.com/api/"
 const DISCORD_CDN = "https://cdn.discordapp.com/"
@@ -21,7 +20,7 @@ const OAUTH_AUTH = `oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${OAUTH
 const OAUTH_TOKEN = "oauth2/token"
 
 const GUILD_INFO = {
-    id: !TEST_GUILD ? "709118412542050364" : "696781447444299826",
+    id: Deno.env.get("GUILD_ID") ?? "",
     icon: Deno.env.get("GUILD_ICON") ?? ""
 }
 
