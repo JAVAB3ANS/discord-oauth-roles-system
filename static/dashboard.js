@@ -209,15 +209,8 @@ window.onload = async function() {
     let userInfo = await getUserInfo()
     let userImageURL = await getUserAvatar(userInfo.id, userInfo.avatar)
 
-    const iconId = "a_6d9390fadb6bc1fa5a59ede9cdfe26b6";
-    let guildImageURL = await getGuildAvatar("574287921717182505", iconId);
-
-    // Only members of this guild can use this bot
-    if (!userInfo.inCorrectGuild) {
-        alert("You don't seem to be a member of UMass CICS Community. Please join the server and try again later. If you think there is an error, DM an admin. " +
-            "\n\nClick Close to join the server.")
-        redirectBrowser("https://discord.gg/PVtSByR")
-    }
+    const iconId = Deno.env.get("GUILD_ID") ? "";
+    let guildImageURL = await getGuildAvatar(Deno.env.get("GUILD_ICON") ? "", iconId); 
 
     // Populate global role map
     globalRoleMap.allRoles = (await getRoles()).sort((roleA, roleB) => roleA.name > roleB.name ? 1 : -1)
