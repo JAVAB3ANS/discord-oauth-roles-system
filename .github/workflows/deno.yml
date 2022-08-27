@@ -32,10 +32,7 @@ jobs:
           deno-version: v1.x
 
       - name: Cache Dependencies
-        run: deno cache deps.ts
-
-      - name: Run Tests
-        run: deno test -A --unstable
+        run: deno cache deps.ts 
 
       - name: Deploy Server
         run: deno run -A main.ts --allow-net --allow-read --allow-env
