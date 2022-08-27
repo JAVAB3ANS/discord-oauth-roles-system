@@ -1,4 +1,3 @@
-
 async function getUserInfo() {
     console.log("Getting user info.")
     let response = await fetch("/identity", {
@@ -89,18 +88,14 @@ function generateRoleTemplate(role, endChar="", restricted=false, current=false)
     const color = `rgb(${colorArray[0]}, ${colorArray[1]}, ${colorArray[2]})`
 
     return `
-        <div class="role ${restricted ? 'restricted' : ''} ${current ? 'current' : 'assignable'}" 
+        <div class="role ${restricted ? "restricted" : ""} ${current ? "current" : "assignable"}" 
             style="border-color: ${color}; background-color: ${color}" 
             id="${role.id}">${role.name} <strong>${endChar}</strong></div>
     `
 }
-
-/**
- *
- */
+ 
 function generateAndRenderAssignableRoles(assignableRoles) {
-    const categoryArray = ["identity", "graduation", "concentration", "residence", "cS_Courses", "math_Courses",
-        "interdisciplinary_Courses", "hobbies", "miscellaneous"]
+    const categoryArray = ["restricted", "identity", "member", "concentration", "rlc", "location", "tags"]
 
     let categoryCollection = ""
     categoryArray.forEach(category => {
@@ -179,7 +174,7 @@ async function submitRoleChanges(userID, roleIDsToAdd, roleIDsToRemove) {
     let response = await fetch("/save", {
         method: "POST",
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
         },
         body: JSON.stringify({
             userID: userID,
@@ -209,8 +204,8 @@ window.onload = async function() {
     let userInfo = await getUserInfo()
     let userImageURL = await getUserAvatar(userInfo.id, userInfo.avatar)
 
-    const iconId = Deno.env.get("GUILD_ID") ? "";
-    let guildImageURL = await getGuildAvatar(Deno.env.get("GUILD_ICON") ? "", iconId); 
+    const iconId = Deno.env.get("GUILD_ID")
+    let guildImageURL = await getGuildAvatar(Deno.env.get("GUILD_ICON"), iconId); 
 
     // Populate global role map
     globalRoleMap.allRoles = (await getRoles()).sort((roleA, roleB) => roleA.name > roleB.name ? 1 : -1)
@@ -225,7 +220,7 @@ window.onload = async function() {
 
     // Set identity details
     document.getElementById("username").innerText = userInfo.username + "#" + userInfo.discriminator
-    document.getElementById("avatar-icon").setAttribute("src", userImageURL !== "null" ? userImageURL : './discord-small.png')
+    document.getElementById("avatar-icon").setAttribute("src", userImageURL !== "null" ? userImageURL : "./discord-small.png")
     document.getElementById("guild-icon").setAttribute("src", guildImageURL)
 
     // Render roles

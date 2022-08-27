@@ -83,7 +83,7 @@ async function getRoles() {
     // requires Bot authorization
     const response = await fetch(DISCORD_API + "guilds/" + GUILD_INFO.id + "/roles", {
         headers: {
-            'Authorization': "Bot " + BOT_SECRET
+            "Authorization": "Bot " + BOT_SECRET
         }
     })
 
@@ -111,7 +111,7 @@ async function getIdentity(cookies: Cookies, response: Response) {
 
     const identity = await fetch(DISCORD_API + "users/@me", {
         headers: {
-            'Authorization': "Bearer " + accessToken
+            "Authorization": "Bearer " + accessToken
         }
     })
     if (identity.status === 401) {
@@ -122,7 +122,7 @@ async function getIdentity(cookies: Cookies, response: Response) {
 
     const guilds = await fetch(DISCORD_API + "users/@me/guilds", {
         headers: {
-            'Authorization': "Bearer " + accessToken
+            "Authorization": "Bearer " + accessToken
         }
     })
     if (guilds.status === 401) {
@@ -170,14 +170,14 @@ router
         const data = new URLSearchParams({
             client_id: CLIENT_ID,
             client_secret: CLIENT_SECRET,
-            grant_type: 'authorization_code',
+            grant_type: "authorization_code",
             code: code,
             redirect_uri: OAUTH_REDIRECT_URL,
-            scope: 'identify email guilds'
+            scope: "identify email guilds"
         })
 
         const headers = {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            "Content-Type": "application/x-www-form-urlencoded"
         }
 
         console.log("Exchanging auth grant for access token")
@@ -219,7 +219,7 @@ router
 
             const response = await fetch(DISCORD_API + "guilds/" + GUILD_INFO.id + "/members/" + ctx.params.userid, {
                 headers: {
-                    'Authorization': "Bot " + BOT_SECRET
+                    "Authorization": "Bot " + BOT_SECRET
                 }
             })
 
@@ -292,8 +292,8 @@ router
 
                 const options = {
                     headers: {
-                        'Authorization': "Bot " + BOT_SECRET,
-                        'Content-Length': '0'
+                        "Authorization": "Bot " + BOT_SECRET,
+                        "Content-Length": "0"
                     },
                     method: "PUT",
                     body: null
@@ -319,7 +319,7 @@ router
                 await wait(1000)
                 fetch(DISCORD_API + roleAPI + roleID, {
                     headers: {
-                        'Authorization': "Bot " + BOT_SECRET
+                        "Authorization": "Bot " + BOT_SECRET
                     },
                     method: "DELETE"
                 }).then(res => {
@@ -351,7 +351,7 @@ app.use(router.routes())
 app.use(router.allowedMethods())
 
 app.use(async ctx => {
-    // ctx.response.headers.set('Cache-Control', 'max-age=604800')
+    // ctx.response.headers.set("Cache-Control", "max-age=604800")
     await send(ctx, ctx.request.url.pathname, {
         root: DEBUG ? `${Deno.cwd()}/static` : "/root/git/discord-oauth-verification-system/static",
         index: "index.html",
@@ -359,4 +359,4 @@ app.use(async ctx => {
 })
 
 console.log(`🦕 Deno server running at http://localhost:8000/ 🦕`)
-await app.listen({ port: 8000 })
+await app.listen({ port: 8000 }) 

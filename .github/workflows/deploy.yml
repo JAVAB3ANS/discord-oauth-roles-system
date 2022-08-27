@@ -27,6 +27,8 @@ jobs:
             REMOTE_HOST: ${{ secrets.REMOTE_HOST }} 
             # Remote user
             REMOTE_USER: ${{ secrets.REMOTE_USER }}
+            # Passphrase
+            PASSPHRASE: ${{ secrets.PASSPHRASE }}
             # Source directory
             SOURCE: $GITHUB_WORKSPACE
             # Target directory
