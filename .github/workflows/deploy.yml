@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: SSH Deploy
-        uses: easingthemes/ssh-deploy@v2.1.5
+        uses: easingthemes/ssh-deploy@main
         with:
             # Private Key
             SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -27,6 +27,8 @@ jobs:
             REMOTE_HOST: ${{ secrets.REMOTE_HOST }} 
             # Remote user
             REMOTE_USER: ${{ secrets.REMOTE_USER }}
+            # Remote port
+            REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
             # Passphrase
             PASSPHRASE: ${{ secrets.PASSPHRASE }}
             # Source directory
@@ -34,14 +36,15 @@ jobs:
             # Target directory
             TARGET: ${{ secrets.TARGET_DIR }}
 #             # Arguments to pass to rsync
-#             ARGS: # optional, default is -rltgoDzvO
+            ARGS: "-rltgoDzvO"
 
-      - name: Reload PM2 Remotely
+      - name: Start PM2 Remotely
         uses: appleboy/ssh-action@master
         with:
             host: ${{ secrets.REMOTE_HOST }}
             username: ${{ secrets.REMOTE_USER }}
             key: ${{ secrets.SSH_PRIVATE_KEY }}
             passphrase: ${{ secrets.PASSPHRASE }}
+            port: $$ {{ secrets.REMOTE_PORT }}
             script: |
-              pm2 reload discord-rolebot
+              pm2 start discord-rolebot
