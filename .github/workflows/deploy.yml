@@ -29,12 +29,10 @@ jobs:
             REMOTE_USER: ${{ secrets.REMOTE_USER }}
             # Remote port
             REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
-            # Passphrase
-            PASSPHRASE: ${{ secrets.PASSPHRASE }}
             # Source directory
             SOURCE: $GITHUB_WORKSPACE
             # Target directory
-            TARGET: ${{ secrets.TARGET_DIR }}
+            TARGET: ${{ secrets.REMOTE_TARGET }}
 #             # Arguments to pass to rsync
             ARGS: "-rltgoDzvO"
 
@@ -44,7 +42,7 @@ jobs:
             host: ${{ secrets.REMOTE_HOST }}
             username: ${{ secrets.REMOTE_USER }}
             key: ${{ secrets.SSH_PRIVATE_KEY }}
-            passphrase: ${{ secrets.PASSPHRASE }}
+            password: ${{ secrets.PASSPHRASE }}
             port: ${{ secrets.REMOTE_PORT }}
             script: |
               pm2 start discord-rolebot
