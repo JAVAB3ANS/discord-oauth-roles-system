@@ -45,6 +45,6 @@ jobs:
             username: ${{ secrets.REMOTE_USER }}
             key: ${{ secrets.SSH_PRIVATE_KEY }}
             passphrase: ${{ secrets.PASSPHRASE }}
-            port: $$ {{ secrets.REMOTE_PORT }}
+            port: ${{ secrets.REMOTE_PORT }}
             script: |
               pm2 start discord-rolebot
