@@ -6,34 +6,62 @@
     <meta name="robots" content="noindex,nofollow" />
     <title>SCU Discord Network Verification</title>
     <link rel="shortcut icon" href="favicon.ico">
-    <link href="bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+
+    <!-- CSS -->
     <link href="main.css" type="text/css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Alata&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <!-- <link href="bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet"> -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Alata&family=Montserrat:wght@300;400&display=swap" rel="stylesheet"> -->
 </head>
 <body>
-<div class="container text-center">
-    <div class="section">
-        <h1 style="margin-left: auto; margin-right: auto">Member Verification</h1>
-    </div>
+    <main>
+        <header>
+            <h1>Member Verification</h1>
+        </header>
 
-    <div class="heading-block justify-content-center">
-        <img src="discord-small.png" class="rounded-circle" id="guild-icon" alt="Guild icon">
-    </div>
-
-    <div class="heading-block justify-content-center section">
-        <h3 class="heading-text text-center">Santa Clara University Discord Network</h3>
-    </div>
-
-    <div class="section">
-        <p>Sign In With Discord</p>
-        <a href="/login" class="btn" id="login-button"><img src="discord-logo.png" alt="discord-sign-in-button"></a>
-    </div>
-
-    <div class="container section text-secondary" id="privacy">
-        This website uses Discord's OAuth2 authentication service to allow the bot to identify you and validate your
-        presence on our Discord server. You will be redirected to an official Discord login webpage — we do not have
-        access to your credentials, and we do not store any user data on our server.
-    </div>
-</div> 
+        <section
+            class="container"
+            style="margin-bottom: 2rem"
+        >
+            <div
+                class="flexCenter"
+                style="margin:2em 0 3em 0"
+            >
+                <div class="logoContainer">
+                    <img
+                        src="discord-small.png"
+                        width="60"
+                        height="60"
+                    />
+                    <h2>
+                        Santa Clara University
+                        <br/>
+                        Discord Network
+                    </h2>
+                </div>
+                <a
+                    class="buttonLink"
+                    href="/login"
+                >
+                    <img
+                        src="discord.png"
+                        style="filter: invert(1);"
+                        alt="discord-logo"
+                        width="25"
+                        height="25"
+                    />
+                    <span>Sign In With Discord</span>
+                </a>
+            </div>
+        </section>
+        <p>
+            This website uses Discord's OAuth2 authentication service to allow the bot to identify you and validate your
+            presence on our Discord server. You will be redirected to an official Discord login webpage — we do not have
+            access to your credentials, and we do not store any user data on our server.
+        </p>
+        
+        <footer>
+            <a href="https://www.flaticon.com/free-icons/discord" title="discord icons">Discord icons created by Freepik - Flaticon</a>
+        </footer>
+    </main> 
 </body>
 </html> 
