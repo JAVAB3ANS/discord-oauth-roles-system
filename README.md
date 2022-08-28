@@ -4,7 +4,7 @@ A *work-in-progress* user-friendly web tool authenticated by Discord's REST API,
 - Utilizes Discord's v14 API.
 - Back-end REST API written in Typescript, using Deno server and oak.
 - Front-end client written in HTML5, CSS, and JavaScript. Uses jQuery, Bootstrap, Popper, and Google Fonts.
-- Accompanied with the [Santa Clara University Discord bot](https://github.com/JAVAB3ANS/).scu-discord-bot)
+- Accompanied with the [Santa Clara University Discord bot](https://github.com/JAVAB3ANS/scu-discord-bot).
 
 ## Login Page
 ![Login](login.png)
