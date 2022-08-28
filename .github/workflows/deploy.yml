@@ -9,7 +9,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "deploy"
-  deploy:
+  DEPLOY_DIGITALOCEAN:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -34,9 +34,11 @@ jobs:
             SOURCE: $GITHUB_WORKSPACE
             # Target directory
             TARGET: ${{ secrets.REMOTE_TARGET }}
-#             # Arguments to pass to rsync
+            # Arguments to pass to rsync
             ARGS: "-rltgoDzvO" 
 
+  SETUP_DENO_SERVER:
+    steps:
       - name: Setup Deno server
       - uses: denoland/setup-deno@v1
         with:
