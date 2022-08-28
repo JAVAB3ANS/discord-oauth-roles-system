@@ -189,6 +189,13 @@ window.onload = async function() {
     let userInfo = await getUserInfo()
     let userImageURL = await getUserAvatar(userInfo.id, userInfo.avatar)   
 
+    // Only members of this guild can use this bot
+    if (!userInfo.inCorrectGuild) {
+        alert("You don't seem to be a member of the SCU Discord Network. Please join the server and try again later. If you think there is an error, DM the owner, admins, or moderators. " +
+            "\n\nClick Close to join the server.")
+        redirectBrowser("https://discord.link/scu")
+    }
+
     // Populate global role map
     globalRoleMap.allRoles = (await getRoles()).sort((roleA, roleB) => roleA.name > roleB.name ? 1 : -1)
     globalRoleMap.currentRoles = await getUserRoles(userInfo.id)
