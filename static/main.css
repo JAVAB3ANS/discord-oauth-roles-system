@@ -8,11 +8,14 @@
     --black1:rgb(40, 40, 40);
     --black2:rgb(35, 35, 35);
     --black3:rgb(30, 30, 30);
+
+    --gray0:rgb(100, 100, 100);
+    --gray1:rgb(70, 70, 70);
 }
 
 body {
     color: #DDD;
-    background-color:  #222;
+    background-color:  var(--black2);
     font-family: 'Montserrat', sans-serif;
 
     -webkit-touch-callout: none; /* iOS Safari */
@@ -30,9 +33,26 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Alata', sans-serif;
 }
 
-header{padding: 0.5em 0;}
-p{color: rgb(100, 100, 100);}
-a{color: rgb(100, 100, 100);}
+.borderBottomTitle{
+    border-bottom: 1px solid var(--black0);
+    width: fit-content;
+    padding-bottom:0.2em
+}
+
+hr{
+    border-radius: 10px;
+    border: 1px solid var(--black0);
+}
+
+.logoContainer h2{font-size:1.2em}
+header{
+    padding: 0.5em 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+p{color: var(--gray0);}
+a{color: var(--gray0);}
 
 .container {
     border-radius: 10px;
@@ -57,6 +77,30 @@ a{color: rgb(100, 100, 100);}
     gap: 1em;
 }
 
+.scuRedButton{
+    color: #fff;
+    background-color: var(--scuBaseColor1);
+    border: 1px solid var(--scuBaseColor3);
+}
+.grayButton{
+    color: #fff;
+    background-color: var(--gray1);
+    border: 1px solid var(--black1);
+}
+
+button{
+    cursor:pointer;
+    padding: 0.5em 1em;
+    border-radius:5px;
+    width:fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    text-decoration: none;
+    box-shadow:0px 5px 5px var(--black2);
+    transition:0.2s;
+}
 .buttonLink{
     padding: 0.5em 1em;
     border-radius:5px;
@@ -69,10 +113,28 @@ a{color: rgb(100, 100, 100);}
     color: #fff;
     text-decoration: none;
     border: 1px solid var(--scuBaseColor3);
+    box-shadow:0px 5px 5px var(--black2);
+    transition:0.2s;
+}
+button:hover,
+.buttonLink:hover{
+    transform: translateY(-2px);
+    box-shadow:0px 5px 5px var(--black3);
+}
+
+
+.alertBanner{
+    color: #fff;
+    background-color: var(--scuBaseColor1);
+    border: 2px solid var(--scuBaseColor1);
+    box-shadow: 0px 2px 10px var(--black3);
+    padding: 1em;
+    border-radius:7px;
 }
 
 
 
+/* Media Queries */
 @media only screen and (min-width: 300px) {main {margin: 0 5%;}}
 @media only screen and (min-width: 700px) {main {margin: 0 15%;}}
 @media only screen and (min-width: 1200px) {main {margin: 0 30%;}}
