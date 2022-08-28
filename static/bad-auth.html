@@ -17,7 +17,7 @@
         </div>
         <div class="section">
             <p>Unfortunately, we received a bad response from Discord's servers and could not authenticate you. Please try again.</p>
-            <p>You will be redirected back to the homepage automatically in <span id="timer">10</span> seconds, otherwise <a href="./dashboard.html">click here</a>.</p>
+            <p>You will be redirected back to the homepage automatically in <span id="timer">10</span> seconds, otherwise <a href="./index.html">click here</a>.</p>
         </div>
     </div> 
 <script>
@@ -27,7 +27,7 @@
             document.getElementById("timer").innerHTML = i.toString()
             await delay(1000)
         }
-        window.location.replace("./dashboard.html")
+        window.location.replace("./index.html")
     }
 </script>
 </body>
