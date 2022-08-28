@@ -1,4 +1,6 @@
-import { Application, Router, Response, Cookies, send, Status } from "./deps.ts"
+import { Application, Router, Response, Cookies, send, config, Status } from "./deps.ts"  
+  
+const { BOT_ID, DISCORD_SECRET, BOT_SECRET, GUILD_ID, GUILD_ICON } = config({ safe: true });
 
 const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -8,33 +10,29 @@ const router = new Router()
 const DEBUG = true  // set to true to enable debug mode
 
 const DISCORD_API = "https://discord.com/api/"
-const DISCORD_CDN = "https://cdn.discordapp.com/"
-
-const CLIENT_ID = Deno.env.get("BOT_ID") ?? ""
-const CLIENT_SECRET = Deno.env.get("DISCORD_SECRET") ?? ""
-const BOT_SECRET = Deno.env.get("BOT_SECRET") ?? ""
+const DISCORD_CDN = "https://cdn.discordapp.com/" 
 
 const OAUTH_REDIRECT_URL = DEBUG ? "http://localhost:8000/auth" : "https://discord.scu.me/auth"
 const OAUTH_REDIRECT = DEBUG ? "http%3A%2F%2Flocalhost%3A8000%2Fauth" : "https%3A%2F%2Fdiscord.scu.me%2Fauth"
-const OAUTH_AUTH = `oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${OAUTH_REDIRECT}&response_type=code&scope=identify%20guilds`
+const OAUTH_AUTH = `oauth2/authorize?client_id=${BOT_ID}&redirect_uri=${OAUTH_REDIRECT}&response_type=code&scope=identify%20guilds` 
 const OAUTH_TOKEN = "oauth2/token"
 
 const GUILD_INFO = {
-    id: Deno.env.get("GUILD_ID") ?? "",
-    icon: Deno.env.get("GUILD_ICON") ?? ""
+    id: GUILD_ID ?? "",
+    icon: GUILD_ICON ?? ""
 }
 
-const restrictedRegex = /(server|Student ✅|@everyone|Admin|Mod|Bots 🤖|SCU BOT ▶ &help|)/i
-const identityRegex = /^(He\/Him|She\/Her|They\/Them|Any Pronouns|Ask for Pronouns)/i
-const memberRegex = /^(SCU Faculty\/Staff|Alumni|Grad Student|2026|2025|2024|2023)/i
-const concentrationRegex = /^(ACTG|ACTG\/IS|AERO ENG|Ancient Studies|ANTH|Arabic|APPLIED MATH|ARTH|BIOCHEM|BIOE|BIOL|COEN|BUSN Analytics|CHEM|CHST|Chinese|CIVIL ENG|CLAS|COMM|CSCI|Counseling|Counseling PSYC|ECON (CAS)|ECON (LSB)|ECEN|EDUC LDRSP|ELEN|ENG MGMT|ENG MGMT & LDRSP|ENG PHYS|English|ENVR SCI|ENVR Studies|ENTR|ETHN|Finance|Finance & Analytics|French|GEN ENG|German|Greek LANG\/LIT|INDV Studies|INFO SYS|ITAL|JAPN|J.D.|J.D.\/MBA|J.D.\/MSIS|Latin\/Greek|Latin LANG\/LIT|LL.M. U.S. LAW|MGMT|MGMT\/ENTREP|HIST|LL.M. INTEL Property|LL.M. INTL & COMP LAW|MGMT INFO SYS|MKTG|MATH|MECH ENG|MBA|MILS|Music|NEUR|ONLINE MKTG|PHIL|PHYS|POLI SCI|POWER SYS & SUST NRG|PSYC|PHSC|Real Estate|RELS|Retail|SOCI|Spanish|Studio Art|SUST Food SYS|Teaching Credential (MATTC)|Theatre\/Dance|UND BUSN|UND ARTS|UND ENG|WDE|WGST)/i
-const rlcRegex = /^(Alpha|Communitas|Cura|Cyphi|da Vinci|Modern Perspectives|Loyola|Unity|Xavier)/i
-const locationRegex = /^(Bay Area|Rocky Mountains|Northeast|Southeast|Midwest|Southwest|Pacific|Non-Contiguous)/i
-const otherTagsRegex = /^(Commuter|Residential|Community Facilitator|Club Leader|Orientation Leader|Peer Advisor|Student Employee)/i 
+const restrictedRegex = /^(server|student|@everyone|owner|admin|moderator|bots|scu bot > &help|unverified)/i
+const identityRegex = /^(he\/him|she\/her|they\/them|any pronouns|ask for pronouns)/i
+const memberRegex = /^(scu faculty\/staff|alumni|grad student|\d{4})/i
+const concentrationRegex = /^(actg|actg\/is|aero eng|ancient studies|anth|arabic|applied math|arth|biochem|bioe|biol|coen|busn analytics|chem|chst|chinese|civil eng|clas|comm|csci|counseling|counseling psyc|econ (cas)|econ (lsb)|ecen|educ ldrsp|elen|eng mgmt|eng mgmt & ldrsp|eng phys|english|envr sci|envr studies|entr|ethn|finance|finance & analytics|french|gen eng|german|greek lang\/lit|indv studies|info sys|ital|japn|j.d.|j.d.\/mba|j.d.\/msis|latin\/greek|latin lang\/lit|ll.m. u.s. law|mgmt|mgmt\/entr|hist|ll.m. intel property|ll.m. intl & comp law|mgmt info sys|mktg|math|mech eng|mba|mils|music|neur|online mktg|phil|phys|poli sci|power sys & sust nrg|psyc|phsc|real estate|rels|retail|soci|spanish|studio art|sust food sys|teaching credential (mattc)|theatre\/dance|und busn|und arts|und eng|wde|wgst)/i
+const rlcRegex = /^(alpha|communitas|cura|cyphi|da vinci|modern perspectives|loyola|unity|xavier)/i
+const locationRegex = /^(bay area|rocky mountains|northeast|southeast|midwest|southwest|pacific|non-contiguous)/i
+const othertagsRegex = /^(commuter|residential|community facilitator|club leader|orientation leader|peer advisor|student employee|ukraine)/i 
 
-const regexArray = [restrictedRegex, identityRegex, memberRegex, concentrationRegex, rlcRegex, locationRegex, otherTagsRegex]
+const regexArray = [restrictedRegex, memberRegex, concentrationRegex, rlcRegex, locationRegex, identityRegex, othertagsRegex]
 
-const categoryArray = ["restricted", "identity", "member", "concentration", "rlc", "location", "tags"]
+const categoryArray = ["restricted", "member", "concentration", "rlc", "location", "identity", "tags"]
 
 interface AccessToken {
     access_token: string,
@@ -168,8 +166,8 @@ router
         }
 
         const data = new URLSearchParams({
-            client_id: CLIENT_ID,
-            client_secret: CLIENT_SECRET,
+            client_id: BOT_ID,
+            client_secret: DISCORD_SECRET,
             grant_type: "authorization_code",
             code: code,
             redirect_uri: OAUTH_REDIRECT_URL,

@@ -39,22 +39,7 @@ async function getUserAvatar(userID, avatarID) {
     let path = `avatars/${userID}/${avatarID}.png`
     let image = await fetch(`/images/${path}`)
     return await image.text()
-}
-
-async function getGuildAvatar(guildID, iconID) {
-    console.log("Getting guild icon.")
-    let path;
-
-    // checks if the icon is animated or not
-    if (/^a_/.test(iconID)) {
-        path = `icons/${guildID}/${iconID}.gif`
-    } else {
-        path = `icons/${guildID}/${iconID}.png`
-    }
-    let imageTxt = await fetch(`/images/${path}`).then(val => val.text(), () => "discord-small.png");
-    console.log(`image path is :${imageTxt}`);
-    return imageTxt;
-}
+} 
 
 function redirectBrowser(location) {
     window.location.replace(location)
@@ -95,7 +80,7 @@ function generateRoleTemplate(role, endChar="", restricted=false, current=false)
 }
  
 function generateAndRenderAssignableRoles(assignableRoles) {
-    const categoryArray = ["restricted", "identity", "member", "concentration", "rlc", "location", "tags"]
+    const categoryArray = ["restricted", "member", "concentration", "rlc", "location", "identity", "tags"]
 
     let categoryCollection = ""
     categoryArray.forEach(category => {
@@ -198,14 +183,11 @@ let globalRoleMap = {
     rolesToRemove: []
 }
 
-window.onload = async function() {
+window.onload = async function() {  
     $("#submit-alert").hide()
 
     let userInfo = await getUserInfo()
-    let userImageURL = await getUserAvatar(userInfo.id, userInfo.avatar)
-
-    const iconId = Deno.env.get("GUILD_ID")
-    let guildImageURL = await getGuildAvatar(Deno.env.get("GUILD_ICON"), iconId); 
+    let userImageURL = await getUserAvatar(userInfo.id, userInfo.avatar)   
 
     // Populate global role map
     globalRoleMap.allRoles = (await getRoles()).sort((roleA, roleB) => roleA.name > roleB.name ? 1 : -1)
@@ -221,7 +203,7 @@ window.onload = async function() {
     // Set identity details
     document.getElementById("username").innerText = userInfo.username + "#" + userInfo.discriminator
     document.getElementById("avatar-icon").setAttribute("src", userImageURL !== "null" ? userImageURL : "./discord-small.png")
-    document.getElementById("guild-icon").setAttribute("src", guildImageURL)
+    document.getElementById("guild-icon").setAttribute("src", "./discord-small.png")
 
     // Render roles
     generateCurrentRoles(globalRoleMap.currentRoles)
@@ -285,4 +267,4 @@ window.onload = async function() {
     }
 
     reassignRoleEventListeners()
-}
+} 

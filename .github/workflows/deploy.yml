@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Deploy to DigitalOcean and Reload Application
+name: Deploy to DigitalOcean and Start Application
 
 on:
   push:
@@ -34,15 +34,4 @@ jobs:
             # Target directory
             TARGET: ${{ secrets.REMOTE_TARGET }}
 #             # Arguments to pass to rsync
-            ARGS: "-rltgoDzvO"
-
-      - name: Start PM2 Remotely
-        uses: appleboy/ssh-action@master
-        with:
-            host: ${{ secrets.REMOTE_HOST }}
-            username: ${{ secrets.REMOTE_USER }}
-            key: ${{ secrets.SSH_PRIVATE_KEY }}
-            password: ${{ secrets.PASSPHRASE }}
-            port: ${{ secrets.REMOTE_PORT }}
-            script: |
-              pm2 start discord-rolebot
+            ARGS: "-rltgoDzvO" 
