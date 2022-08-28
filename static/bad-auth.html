@@ -6,33 +6,29 @@
     <meta name="robots" content="noindex,nofollow" />
     <title>SCU Discord Network Verification | Error</title>
     <link rel="shortcut icon" href="favicon.ico">
-
-    <!-- CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
     <link href="main.css" type="text/css" rel="stylesheet">
-    <!-- <link href="bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet"> -->
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Alata&family=Montserrat:wght@300;400&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Alata&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
-    <main>
-        <header>
+    <div class="container">
+        <div class="section" style="margin-top: 2rem; margin-bottom: 2rem">
             <h1>SCU Discord Network Verification</h1>
-        </header>
-        <p>
-            Unfortunately, we received a bad response from Discord's servers and could not authenticate you. Please try again.
-            <br/>
-            You will be redirected back to the homepage automatically in <span id="timer">10</span> seconds, otherwise <a href="/dashboard.html">click here</a>.
-        </p>
-    </main> 
-    
-    <script>
-        const delay = ms => new Promise(res => setTimeout(res, ms));
-        window.onload = async () => {
-            for (let i = 10; i >= 0; i--) {
-                document.getElementById("timer").innerHTML = i.toString()
-                await delay(1000)
-            }
-            window.location.replace("./dashboard.html")
+        </div>
+        <div class="section">
+            <p>Unfortunately, we received a bad response from Discord's servers and could not authenticate you. Please try again.</p>
+            <p>You will be redirected back to the homepage automatically in <span id="timer">10</span> seconds, otherwise <a href="./dashboard.html">click here</a>.</p>
+        </div>
+    </div> 
+<script>
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+    window.onload = async () => {
+        for (let i = 10; i >= 0; i--) {
+            document.getElementById("timer").innerHTML = i.toString()
+            await delay(1000)
         }
-    </script>
+        window.location.replace("./dashboard.html")
+    }
+</script>
 </body>
 </html> 

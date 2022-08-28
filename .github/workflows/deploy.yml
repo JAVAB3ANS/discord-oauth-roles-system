@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Deploy to DigitalOcean and Start Application
+name: Deploy to DigitalOcean and Start Deno Server
 
 on:
   push:
@@ -16,6 +16,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Setup repo
       - uses: actions/checkout@v3
 
       - name: SSH Deploy
@@ -35,3 +36,14 @@ jobs:
             TARGET: ${{ secrets.REMOTE_TARGET }}
 #             # Arguments to pass to rsync
             ARGS: "-rltgoDzvO" 
+
+      - name: Setup Deno server
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Cache Dependencies
+        run: deno cache deps.ts 
+
+      - name: Deploy Server
+        run: deno run -A main.ts --allow-net --allow-read --allow-env

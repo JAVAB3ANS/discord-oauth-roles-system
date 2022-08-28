@@ -6,132 +6,91 @@
         <meta name="robots" content="noindex,nofollow" />
         <title>SCU Discord Network Verification | Dashboard</title>
         <link rel="shortcut icon" href="favicon.ico">
-
-        <!-- CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
         <link href="main.css" type="text/css" rel="stylesheet">
-        <!-- <link href="bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet"> -->
-        <!-- <link href="https://fonts.googleapis.com/css2?family=Alata&family=Montserrat:wght@300;400&display=swap" rel="stylesheet"> -->
+        <link href="https://fonts.googleapis.com/css2?family=Alata&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
     </head>
     <body>
         <!-- IF UNPRIVILEGED, REDIRECT TO /login (use JS + backend to verify) -->
-        <main>
-            <header>
-                <h3>SCU Discord<br/> Network Verification</h3>
-                <h4>Username</h4>
-            </header>
-
-            <section
-                class="container"
-            >
-                <div
-                    class="flexCenter"
-                    style="margin:2em 0 3em 0"
-                >
-                    <div class="logoContainer">
-                        <img
-                            src="discord-small.png"
-                            width="60"
-                            height="60"
-                        />
-                        <h2>
-                            Santa Clara University
-                            <br/>
-                            Discord Network
-                        </h2>
+        <div class="container">
+            <div class="row" id="nav">
+                <div class="col-sm-12 col-md-6">
+                    <h2>SCU Discord Network Verification</h2>
+                </div>
+                <div class="offset-md-3 col-md-3 dropdown">
+                    <div class="heading-block justify-content-end dropdown-toggle" id="user-block" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" data-offset="-5,10">
+                        <h4 class="heading-text" id="username">Username</h4>
+                        <img src="discord-small.png" class="heading-img rounded-circle" id="avatar-icon" alt="Avatar icon">
                     </div>
-                    <div
-                        style="
-                            display: flex;
-                            align-items:center;
-                            gap:0.4em;
-                        "
-                    >
-                        <button
-                            class="scuRedButton"
-                            id="submit-changes"
-                        >
-                            Submit Changes
-                        </button>
-                        <button
-                            class="grayButton"
-                            id="reset"
-                        >
-                            Undo Changes
-                        </buttonid=>
+                    <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="user-block">
+                        <p class="dropdown-item-text text-secondary">Feedback? Open a pull request below! ⏬</p>
+                        <a class="dropdown-item text-primary" href="https://github.com/JAVAB3ANS/discord-oauth-verification-system/" target="_blank">View Source Code</a>
+                        <a class="dropdown-item text-danger" href="/logout">Logout</a>
                     </div>
                 </div>
-    
-    
-                <div 
-                    class="alertBanner"
-                    role="alert"
-                    id="submit-alert"
-                >
-                    Role changes have been submitted! Please wait at least <strong><span id="time">x</span></strong> second(s). The page will automatically refresh when complete.
-                </div>
-    
-                <section>
-                    <h4 class="borderBottomTitle">Current Roles</h4>
-                    <div>
-                        <div class="card-body" id="current-roles-container">
-                            <p>Loading...</p>
-                           <!-- <div class="role" style="border-color: rgb(150, 0, 0); background-color: rgb(150, 0, 0)">CS 121 <strong>x</strong></div> -->
-                        </div>
-                    </div>
-                </section>
-                <hr>    
-                <section>
-                    <h4 class="borderBottomTitle">Assignable Roles</h4>
-                    <div>
-                        <p>Loading...</p>
-                        <!-- EXAMPLE ROLE -->
-            <!--            <div class="card">-->
-            <!--                <div class="card-header" id="identity-roles-header">-->
-            <!--                    <h2 class="mb-0">-->
-            <!--                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"-->
-            <!--                                data-target="#collapse-identity-roles" aria-expanded="true" aria-controls="collapse-identity-roles">-->
-            <!--                            Identity Roles-->
-            <!--                        </button>-->
-            <!--                    </h2>-->
-            <!--                </div>-->
-            <!--                <div class="collapse show" id="collapse-identity-roles" aria-labelledby="identity-roles-header"-->
-            <!--                     data-parent="#assignable-roles-accordion">-->
-            <!--                    <div class="card-body" id="identity-roles-container">-->
-            <!--                        <div class="role" style="border-color: rgb(150, 0, 0); background-color: rgb(150, 0, 0)">CS 121 <strong>+</strong></div>-->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div>-->
-                    </div>
-                </section>
-            </section>
+            </div>
 
-            <footer>
-                <div
-                    style="
-                        display: flex;
-                        align-items:center;
-                        justify-content: space-between;
-                        gap:0.4em;
-                    "
-                >
-                    <p>
-                        Feedback? Open a 
-                        <a
-                            href="https://github.com/JAVAB3ANS/discord-oauth-verification-system/"
-                            target="_blank"
-                        >
-                            pull request.
-                        </a>
-                    </p>
-                    <a href="/logout">
-                        Logout
-                    </a>
-                </div>
-                <p>Created by Jason Vu.</p>
-            </footer>
-        </main>
+            <div class="heading-block justify-content-center">
+                <img src="discord-small.png" class="rounded-circle" id="guild-icon" alt="Guild icon">
+            </div>
 
-        <!-- Scripts -->
+            <div class="heading-block justify-content-center">
+                <h3 class="heading-text text-center">Santa Clara University Discord Network</h3>
+            </div>
+
+            <div class="section text-center" id="controls">
+                <button class="btn btn-outline-primary" id="submit-changes">Submit Changes</button>
+                <button class="btn btn-outline-danger" id="reset">Undo Changes</button>
+            </div>
+
+            <div class="row">
+                <div class="offset-2 col-8">
+                    <div class="alert alert-success text-center" role="alert" id="submit-alert">
+                        Role changes have been submitted! Please wait at least <strong><span id="time">x</span></strong> second(s). The page will automatically refresh when complete.
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h4>Current Roles</h4>
+                <hr>
+                <div class="card">
+                    <div class="card-body" id="current-roles-container">
+                        <p class="text-center text-secondary">Loading...</p>
+        <!--                <div class="role" style="border-color: rgb(150, 0, 0); background-color: rgb(150, 0, 0)">CS 121 <strong>x</strong></div>-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h4>Assignable Roles</h4>
+                <hr>
+                <div class="accordion" id="assignable-roles-accordion">
+                    <p class="text-center text-secondary">Loading...</p>
+                    <!-- EXAMPLE ROLE -->
+        <!--            <div class="card">-->
+        <!--                <div class="card-header" id="identity-roles-header">-->
+        <!--                    <h2 class="mb-0">-->
+        <!--                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"-->
+        <!--                                data-target="#collapse-identity-roles" aria-expanded="true" aria-controls="collapse-identity-roles">-->
+        <!--                            Identity Roles-->
+        <!--                        </button>-->
+        <!--                    </h2>-->
+        <!--                </div>-->
+        <!--                <div class="collapse show" id="collapse-identity-roles" aria-labelledby="identity-roles-header"-->
+        <!--                     data-parent="#assignable-roles-accordion">-->
+        <!--                    <div class="card-body" id="identity-roles-container">-->
+        <!--                        <div class="role" style="border-color: rgb(150, 0, 0); background-color: rgb(150, 0, 0)">CS 121 <strong>+</strong></div>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </div>-->
+                </div>
+            </div>
+            <div class="text-center">
+                <p class="text-secondary">Created by Jason Vu.</p>
+            </div>
+        </div>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
         <script src="bootstrap/js/popper.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>  

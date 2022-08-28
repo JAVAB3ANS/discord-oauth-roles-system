@@ -255,7 +255,7 @@ window.onload = async function() {
                         globalRoleMap.currentRoles.push(lookupRole(globalRoleMap.allRoles, role.id))
 
                         // add the ID to rolesToAdd
-                        globalRoleMap.rolesToAdd.push(role.id)
+                        globalRoleMap.rolesToAdd.push(role.id) 
 
                         // remove the ID from rolesToRemove
                         let index = globalRoleMap.rolesToRemove.indexOf(role.id)
