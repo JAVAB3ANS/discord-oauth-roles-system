@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Deploy to DigitalOcean and Start Deno Server
+name: Deploy to DigitalOcean and Reload Application
 
 on:
   push:
@@ -16,19 +16,32 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Setup repo
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
       - name: SSH Deploy
-        uses: easingthemes/ssh-deploy@main
+        uses: easingthemes/ssh-deploy@v2.1.5
         with:
             # Private Key
-            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+            SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
             # Remote host
-            REMOTE_HOST: ${{ secrets.REMOTE_HOST }} 
+            REMOTE_HOST: ${{ secrets.DROPLET_IP }}
+            # Passphrase
+            PASSPHRASE: ${{ secrets.PASSPHRASE }}
             # Remote user
-            REMOTE_USER: ${{ secrets.REMOTE_USER }} 
+            REMOTE_USER: ${{ secrets.USER }}
             # Source directory
             SOURCE: $GITHUB_WORKSPACE
             # Target directory
-            TARGET: ${{ secrets.REMOTE_TARGET }} 
+            TARGET: ${{ secrets.TARGET_DIR }}
+#             # Arguments to pass to rsync
+#             ARGS: # optional, default is -rltgoDzvO
+
+      - name: Reload PM2 Remotely
+        uses: appleboy/ssh-action@master
+        with:
+            host: ${{ secrets.DROPLET_IP }}
+            username: ${{ secrets.USER }}
+            key: ${{ secrets.PRIVATE_KEY }}
+            passphrase: ${{ secrets.PASSPHRASE }}
+            script: |
+              pm2 reload discord-rolebot
