@@ -27,12 +27,8 @@ jobs:
             # Remote host
             REMOTE_HOST: ${{ secrets.REMOTE_HOST }} 
             # Remote user
-            REMOTE_USER: ${{ secrets.REMOTE_USER }}
-            # Remote port
-            REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
+            REMOTE_USER: ${{ secrets.REMOTE_USER }} 
             # Source directory
             SOURCE: $GITHUB_WORKSPACE
             # Target directory
-            TARGET: ${{ secrets.REMOTE_TARGET }}
-            # Arguments to pass to rsync
-            ARGS: "-rltgoDzvO" 
+            TARGET: ${{ secrets.REMOTE_TARGET }} 
