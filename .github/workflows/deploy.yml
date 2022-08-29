@@ -30,4 +30,15 @@ jobs:
             # Source directory
             SOURCE: $GITHUB_WORKSPACE
             # Target directory
-            REMOTE_TARGET: ${{ secrets.REMOTE_TARGET }}   
+            REMOTE_TARGET: ${{ secrets.REMOTE_TARGET }}    
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: ${{ matrix.deno }} # tests across multiple Deno versions
+
+      - name: Cache Dependencies
+        run: deno cache deps.ts
+
+      - name: Run Deno Server
+        run: deno run -A main.ts --allow-net --allow-read --allow-env
