@@ -4,41 +4,29 @@ name: Deploy to DigitalOcean
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
+  pull_request:
+    branches: [master]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "deploy"
-  deploy:
-    # The type of runner that the job will run on
+  deploy-do:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
 
-      - name: SSH Deploy
-        uses: easingthemes/ssh-deploy@v2.2.11
-        env:
-            # Private Key
-            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-            # Remote host
-            REMOTE_HOST: ${{ secrets.REMOTE_HOST }} 
-            # Remote user
-            REMOTE_USER: ${{ secrets.REMOTE_USER }}
-            # Source directory
-            SOURCE: $GITHUB_WORKSPACE
-            # Target directory
-            REMOTE_TARGET: ${{ secrets.REMOTE_TARGET }}    
-
-      - name: Setup Deno
-        uses: denoland/setup-deno@v1
+      - uses: denoland/setup-deno@v1
         with:
-          deno-version: ${{ matrix.deno }} # tests across multiple Deno versions
+          deno-version: v1.x
 
-      - name: Cache Dependencies
-        run: deno cache deps.ts
-
-      - name: Run Deno Server
-        run: deno run -A main.ts --allow-net --allow-read --allow-env
+      - name: SSH to server and Deploy App
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_NAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            deno cache deps.ts
+            deno run -A main.ts --allow-net --allow-read --allow-env
