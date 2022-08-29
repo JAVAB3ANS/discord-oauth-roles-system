@@ -16,32 +16,28 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: SSH Deploy
-        uses: easingthemes/ssh-deploy@v2.1.5
-        with:
+        uses: easingthemes/ssh-deploy@main
+        env:
             # Private Key
-            SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
             # Remote host
-            REMOTE_HOST: ${{ secrets.DROPLET_IP }}
-            # Passphrase
-            PASSPHRASE: ${{ secrets.PASSPHRASE }}
+            REMOTE_HOST: ${{ secrets.REMOTE_HOST }} 
             # Remote user
-            REMOTE_USER: ${{ secrets.USER }}
+            REMOTE_USER: ${{ secrets.REMOTE_USER }}
             # Source directory
             SOURCE: $GITHUB_WORKSPACE
             # Target directory
-            TARGET: ${{ secrets.TARGET_DIR }}
-#             # Arguments to pass to rsync
-#             ARGS: # optional, default is -rltgoDzvO
+            REMOTE_TARGET: ${{ secrets.REMOTE_TARGET }} 
 
       - name: Reload PM2 Remotely
         uses: appleboy/ssh-action@master
         with:
-            host: ${{ secrets.DROPLET_IP }}
-            username: ${{ secrets.USER }}
-            key: ${{ secrets.PRIVATE_KEY }}
+            host: ${{ secrets.REMOTE_HOST }}
+            username: ${{ secrets.REMOTE_USER }}
+            key: ${{ secrets.SSH_PRIVATE_KEY }}
             passphrase: ${{ secrets.PASSPHRASE }}
             script: |
               pm2 reload discord-rolebot
