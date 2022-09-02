@@ -187,25 +187,13 @@ window.onload = async function() {
     $("#submit-alert").hide()
 
     let userInfo = await getUserInfo()
-    let userImageURL = await getUserAvatar(userInfo.id, userInfo.avatar)   
-
-    // Only members of this guild can use this bot
-    if (!userInfo.inCorrectGuild) {
-        alert("You don't seem to be a member of the SCU Discord Network. Please join the server and try again later. If you think there is an error, DM the owner, admins, or moderators. " +
-            "\n\nClick Close to join the server.")
-        redirectBrowser("https://discord.link/scu")
-    }
+    let userImageURL = await getUserAvatar(userInfo.id, userInfo.avatar)    
 
     // Populate global role map
     globalRoleMap.allRoles = (await getRoles()).sort((roleA, roleB) => roleA.name > roleB.name ? 1 : -1)
     globalRoleMap.currentRoles = await getUserRoles(userInfo.id)
 
-    // // Only "verified" users can use this bot
-    // if (!globalRoleMap.currentRoles.find(roleID => lookupRole(globalRoleMap.allRoles, roleID).name === "Verified")) {
-    //     alert("Please read the messages in #welcome and react with a checkmark. If you think there is an error, DM an admin. " +
-    //         "\n\nClick Close to be redirected.")
-    //     redirectBrowser("https://discordapp.com/channels/574287921717182505/695941985206272040/745356434656592013")
-    // }
+    // Here, figure out how to remove "unverified" role from user to replace with "student" role  
 
     // Set identity details
     document.getElementById("username").innerText = userInfo.username + "#" + userInfo.discriminator
