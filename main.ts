@@ -1,19 +1,19 @@
 import { Application, Router, Response, Cookies, send, config, Status } from "./deps.ts"  
   
-const { BOT_ID, DISCORD_SECRET, BOT_SECRET, GUILD_ID, GUILD_ICON } = config({ safe: true });
+const { BOT_ID, DISCORD_SECRET, BOT_SECRET, GUILD_ID, GUILD_ICON, OAUTH_RED, OAUTH_RED_URL } = config({ safe: true });
 
 const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 const app = new Application()
 const router = new Router()
 
-const DEBUG = true  // set to true to enable debug mode
+const DEBUG = false  // set to true to enable debug mode
 
 const DISCORD_API = "https://discord.com/api/"
 const DISCORD_CDN = "https://cdn.discordapp.com/" 
 
-const OAUTH_REDIRECT_URL = DEBUG ? "http://localhost:8000/auth" : "https://login.discordscu.com/auth"
-const OAUTH_REDIRECT = DEBUG ? "http%3A%2F%2Flocalhost%3A8000%2Fauth" : "https%3A%2F%2Flogin.discordscu.com%2Fauth"
+const OAUTH_REDIRECT_URL = DEBUG ? "http://localhost:8000/auth" : OAUTH_RED
+const OAUTH_REDIRECT = DEBUG ? "http%3A%2F%2Flocalhost%3A8000%2Fauth" : OAUTH_RED_URL
 const OAUTH_AUTH = `oauth2/authorize?client_id=${BOT_ID}&redirect_uri=${OAUTH_REDIRECT}&response_type=code&scope=identify%20guilds` 
 const OAUTH_TOKEN = "oauth2/token"
 
@@ -25,10 +25,10 @@ const GUILD_INFO = {
 const restrictedRegex = /^(server|student|@everyone|owner|admin|moderator|bots|scu bot > &help|unverified)/i
 const identityRegex = /^(he\/him|she\/her|they\/them|any pronouns|ask for pronouns)/i
 const memberRegex = /^(scu faculty\/staff|alumni|grad student|\d{4})/i
-const concentrationRegex = /^(actg|actg\/is|aero eng|ancient studies|anth|arabic|applied math|arth|biochem|bioe|biol|coen|busn analytics|chem|chst|chinese|civil eng|clas|comm|csci|counseling|counseling psyc|econ (cas)|econ (lsb)|ecen|educ ldrsp|elen|eng mgmt|eng mgmt & ldrsp|eng phys|english|envr sci|envr studies|entr|ethn|finance|finance & analytics|french|gen eng|german|greek lang\/lit|indv studies|info sys|ital|japn|j.d.|j.d.\/mba|j.d.\/msis|latin\/greek|latin lang\/lit|ll.m. u.s. law|mgmt|mgmt\/entr|hist|ll.m. intel property|ll.m. intl & comp law|mgmt info sys|mktg|math|mech eng|mba|mils|music|neur|online mktg|phil|phys|poli sci|power sys & sust nrg|psyc|phsc|real estate|rels|retail|soci|spanish|studio art|sust food sys|teaching credential (mattc)|theatre\/dance|und busn|und arts|und eng|wde|wgst)/i
+const concentrationRegex = /^(actg|actg\/is|aero eng|ancient studies|anth|arabic|applied math|arth|biochem|bioe|biol|coen|busn analytics|chem|chst|chinese|civil eng|clas|comms|csci|counseling|counseling psyc|econ (cas)|econ (lsb)|ecen|educ ldrsp|elen|eng mgmt|eng mgmt & ldrsp|eng phys|english|envr sci|envr studies|entr|ethn|finance|finance & analytics|french|gen eng|german|greek lang\/lit|indv studies|info sys|ital|japn|j.d.|j.d.\/mba|j.d.\/msis|latin\/greek|latin lang\/lit|ll.m. u.s. law|mgmt|mgmt\/entr|hist|ll.m. intel property|ll.m. intl & comp law|mgmt info sys|mktg|math|mech eng|mba|mils|music|neur|online mktg|phil|phys|poli sci|power sys & sust nrg|psyc|phsc|real estate|rels|retail|soci|spanish|studio art|sust food sys|teaching credential (mattc)|theatre\/dance|und busn|und arts|und eng|wde|wgst)/i
 const rlcRegex = /^(alpha|communitas|cura|cyphi|da vinci|modern perspectives|loyola|unity|xavier)/i
 const locationRegex = /^(bay area|rocky mountains|northeast|southeast|midwest|southwest|pacific|non-contiguous)/i
-const othertagsRegex = /^(🚗 commuter|🏠 residential|🤝 community facilitator|🏃⬅️🏃🏃🏃 club leader|🤗⬅️🏃🏃🏃 orientation leader|🧑‍🤝‍🧑 peer advisor|💼 student employee|ukraine)/i 
+const othertagsRegex = /^(commuter|residential|community facilitator|club leader|orientation leader|peer advisor|school employee|ukraine)/i 
 
 const regexArray = [restrictedRegex, memberRegex, concentrationRegex, rlcRegex, locationRegex, identityRegex, othertagsRegex]
 
@@ -114,7 +114,7 @@ async function getIdentity(cookies: Cookies, response: Response) {
     })
     if (identity.status === 401) {
         response.status = Status.Unauthorized
-        response.redirect("/bad-auth")
+        response.redirect("/bad-auth.html")
         return ""
     }
 
@@ -161,7 +161,7 @@ router
 
         // authorization code is bad
         if (!check) {
-            ctx.response.redirect("/bad-auth")
+            ctx.response.redirect("/bad-auth.html")
             return
         }
 
