@@ -22,7 +22,7 @@ const GUILD_INFO = {
     icon: GUILD_ICON ?? ""
 }
 
-const restrictedRegex = /^(server|student|@everyone|owner|admin|moderator|bots|scu bot > &help|unverified)/i
+const restrictedRegex = /^(server|student|@everyone|owner|admin|moderator|bots|scu bot > &help)/i
 const identityRegex = /^(he\/him|she\/her|they\/them|any pronouns|ask for pronouns)/i
 const memberRegex = /^(scu faculty\/staff|alumni|grad student|\d{4})/i
 const concentrationRegex = /^(actg|actg\/is|aero eng|ancient studies|anth|arabic|applied math|arth|biochem|bioe|biol|coen|busn analytics|chem|chst|chinese|civil eng|clas|comms|csci|counseling|counseling psyc|econ (cas)|econ (lsb)|ecen|educ ldrsp|elen|eng mgmt|eng mgmt & ldrsp|eng phys|english|envr sci|envr studies|entr|ethn|finance|finance & analytics|french|gen eng|german|greek lang\/lit|indv studies|info sys|ital|japn|j.d.|j.d.\/mba|j.d.\/msis|latin\/greek|latin lang\/lit|ll.m. u.s. law|mgmt|mgmt\/entr|hist|ll.m. intel property|ll.m. intl & comp law|mgmt info sys|mktg|math|mech eng|mba|mils|music|neur|online mktg|phil|phys|poli sci|power sys & sust nrg|psyc|phsc|real estate|rels|retail|soci|spanish|studio art|sust food sys|teaching credential (mattc)|theatre\/dance|und busn|und arts|und eng|wde|wgst)/i
