@@ -80,7 +80,7 @@ function generateRoleTemplate(role, endChar="", restricted=false, current=false)
 }
  
 function generateAndRenderAssignableRoles(assignableRoles) {
-    const categoryArray = ["restricted", "member", "concentration", "rlc", "location", "identity", "tags"]
+    const categoryArray = ["member", "concentration", "rlc", "location", "identity", "tags"]
 
     let categoryCollection = ""
     categoryArray.forEach(category => {
