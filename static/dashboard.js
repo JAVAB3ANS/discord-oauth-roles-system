@@ -193,8 +193,8 @@ window.onload = async function() {
 
     // Set identity details
     document.getElementById("username").innerText = userInfo.username + "#" + userInfo.discriminator
-    document.getElementById("avatar-icon").setAttribute("src", userImageURL !== "null" ? userImageURL : "./discord-small.png")
-    document.getElementById("guild-icon").setAttribute("src", "./discord-small.png")
+    document.getElementById("avatar-icon").setAttribute("src", userImageURL !== "null" ? userImageURL : "./discord-small.webp")
+    document.getElementById("guild-icon").setAttribute("src", "./discord-small.webp")
 
     // Render roles
     generateCurrentRoles(globalRoleMap.currentRoles)
