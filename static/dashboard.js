@@ -73,9 +73,13 @@ function generateRoleTemplate(role, endChar="", restricted=false, current=false)
     const color = `rgb(${colorArray[0]}, ${colorArray[1]}, ${colorArray[2]})`
 
     return `
-        <div class="role ${restricted ? "restricted" : ""} ${current ? "current" : "assignable"}" 
-            style="border-color: ${color}; background-color: ${color}" 
-            id="${role.id}">${role.name} <strong>${endChar}</strong></div>
+        <div
+            class="role ${restricted ? "restricted" : ""} ${current ? "current" : "assignable"}"
+            style="border-color: ${color}; background-color: ${color}"
+            id="${role.id}"
+        >
+            ${role.name} <strong>${endChar}</strong>
+        </div>
     `
 }
  
@@ -93,23 +97,15 @@ function generateAndRenderAssignableRoles(assignableRoles) {
         })
 
         const categoryTemplate = `
-            <div class="card">
-                <div class="card-header" id="${category}-roles-header">
-                    <h2 class="mb-0">
-                        <button class="btn btn-block text-left" type="button" data-toggle="collapse"
-                                data-target="#collapse-${category}-roles" aria-expanded="true" aria-controls="collapse-${category}-roles">
-                            ${normalizedHeader} Roles
-                        </button>
-                    </h2>
+            <details open>
+                <summary id="${category}-roles-header">
+                    ${normalizedHeader} Roles
+                </summary>
+                <div id="${category}-roles-container" style="margin-top: 1em">
+                    ${roleCollection}
                 </div>
-                <div class="collapse show" id="collapse-${category}-roles" aria-labelledby="${category}-roles-header">
-                    <div class="card-body" id="${category}-roles-container">
-                        ${roleCollection}
-                    </div>
-                </div>
-            </div>
-        `
-
+            </details>
+            `
         categoryCollection += categoryTemplate
     })
 
