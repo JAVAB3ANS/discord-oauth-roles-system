@@ -1,5 +1,3 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Alata&family=Montserrat&display=swap'); */
-
 :root{
     /* Colors are from light to dark */
     --scuBaseColor0:#cb1f21;
@@ -142,15 +140,12 @@ button:hover,
 /* Media Queries */
 @media only screen and (min-width: 300px) {main {margin: 0 5%;}}
 @media only screen and (min-width: 700px) {main {margin: 0 15%;}}
-@media only screen and (min-width: 1200px) {main {margin: 0 30%;}}
-
-
+@media only screen and (min-width: 1200px) {main {margin: 0 25%;}}
 
 
 /* OLD STYLES */
 #guild-icon {
     display: block;
-    margin-bottom: 1rem;
 }
 
 .role {
@@ -165,20 +160,6 @@ button:hover,
     border: 1px solid red;
     border-radius: 5px;
 }
-
-.role:not(.restricted):hover {
-    cursor: pointer;
-}
-
-.dropdown-menu {
-    box-shadow: 0 0 10px 1px #1A1A1A;
-    border-radius: 8px;
-    font-family: 'Alata', sans-serif;
-}
-
-/* #nav {
-    margin: 2rem;
-} */
 
 #controls {
     display:flex;
