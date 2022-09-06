@@ -75,7 +75,7 @@ function generateRoleTemplate(role, endChar="", restricted=false, current=false)
     return `
         <div
             class="role ${restricted ? "restricted" : ""} ${current ? "current" : "assignable"}"
-            style="border-color: ${color}; background-color: ${color}"
+            style="border-color: ${color}; background-color: ${color}; cursor:pointer;"
             id="${role.id}"
         >
             ${role.name} <strong>${endChar}</strong>
