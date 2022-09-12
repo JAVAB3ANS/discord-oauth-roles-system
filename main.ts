@@ -1,30 +1,28 @@
-import { Application, Router, Response, Cookies, send, config, Status } from "./deps.ts"  
-  
-const { BOT_ID, DISCORD_SECRET, BOT_SECRET, GUILD_ID, GUILD_ICON, OAUTH_RED, OAUTH_RED_URL } = config({ safe: true });
+import { Application, Router, Response, Cookies, send, Status } from "./deps.ts"  
 
 const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 const app = new Application()
 const router = new Router()
 
-const DEBUG = true  // set to true to enable debug mode
+const DEBUG = false  // set to true to enable debug mode
 
 const DISCORD_API = "https://discord.com/api/"
 const DISCORD_CDN = "https://cdn.discordapp.com/" 
 
-const OAUTH_REDIRECT_URL = DEBUG ? "http://localhost:8000/auth" : OAUTH_RED
-const OAUTH_REDIRECT = DEBUG ? "http%3A%2F%2Flocalhost%3A8000%2Fauth" : OAUTH_RED_URL
-const OAUTH_AUTH = `oauth2/authorize?client_id=${BOT_ID}&redirect_uri=${OAUTH_REDIRECT}&response_type=code&scope=identify%20guilds` 
+const OAUTH_REDIRECT_URL = DEBUG ? "http://localhost:8000/auth" : "https://login.discordscu.com/auth"
+const OAUTH_REDIRECT = DEBUG ? "http%3A%2F%2Flocalhost%3A8000%2Fauth" : "https%3A%2F%2Flogin.discordscu.com%2Fauth"
+const OAUTH_AUTH = `oauth2/authorize?client_id=867818858936401921&redirect_uri=${OAUTH_REDIRECT}&response_type=code&scope=identify%20guilds` 
 const OAUTH_TOKEN = "oauth2/token"
 
 const GUILD_INFO = {
-    id: GUILD_ID ?? "",
-    icon: GUILD_ICON ?? ""
+    id: "709118412542050364" ?? "",
+    icon: "a_e3e8b881c8359759d0cd6ae886c890ee" ?? ""
 }
 
 const restrictedRegex = /(server|student|scu faculty\/staff|@everyone|owner|admin|moderator|bots|scu bot > &help|prospective student|----)/i
 const identityRegex = /^(he\/him|she\/her|they\/them|any pronouns|ask for pronouns)/i
-const memberRegex = /^(alumni|grad student|\d{4})/i
+const memberRegex = /^(alumni|grad student|freshman|sophomore|junior|senior)/i
 const concentrationRegex = /^(aimes|asian sts|african american sts|pre-health sci|pre-law|pre-teaching|pastoral ministries|musical theatre|urban edu|catholic sts|med & ren sts|latin american sts|latina\/o\/x sts|actg|actg\/is|aero eng|ancient sts|anth|arabic|applied math|arth|biochem|bioe|biol|coen|busn anlyts|chem|chst|chinese|civil eng|clas|comms|csci|couns|couns psyc|econ (cas)|econ (lsb)|ecen|educ ldrsp|elen|eng mgmt|eng mgmt & ldrsp|eng phys|english|envr sci|envr sts|entr|ethn|fnce|fnc & anlyts|french|gen eng|german|greek lang\/lit|indv sts|info sys|ital|japn|j.d.|j.d.\/mba|j.d.\/msis|latin\/greek|latin lang\/lit|ll.m. u.s. law|mgmt|mgmt\/entr|hist|ll.m. intel property|ll.m. intl & comp law|mis|mktg|math|mech eng|mba|mils|music|neur|online mktg|phil|phys|poli sci|power sys & sust nrg|psyc|phsc|real estate|rels|retail|soci|spanish|studio art|sust food sys|teaching cred (mattc)|theatre\/dance|und busn|und arts|und eng|wde|wgst)/i
 const rlcRegex = /^(alpha|campisi|cura|cyphi|da vinci|modern perspectives|loyola|neighborhood units|nobili|sanfilippo|unity|university villas)/i
 const locationRegex = /^(bay area|rocky mountains|northeast|southeast|midwest|southwest|pacific|international)/i
@@ -81,7 +79,7 @@ async function getRoles() {
     // requires Bot authorization
     const response = await fetch(DISCORD_API + "guilds/" + GUILD_INFO.id + "/roles", {
         headers: {
-            "Authorization": "Bot " + BOT_SECRET
+            "Authorization": "Bot " + "ODY3ODE4ODU4OTM2NDAxOTIx.YPmpSw.uiu-Qb51ErggtOBenUie3sRT36E"
         }
     })
 
@@ -166,8 +164,8 @@ router
         }
 
         const data = new URLSearchParams({
-            client_id: BOT_ID,
-            client_secret: DISCORD_SECRET,
+            client_id: "867818858936401921",
+            client_secret: "FfuvxjUhi6gB0n0O4wwzHqk60fddJoc7",
             grant_type: "authorization_code",
             code: code,
             redirect_uri: OAUTH_REDIRECT_URL,
@@ -217,7 +215,7 @@ router
 
             const response = await fetch(DISCORD_API + "guilds/" + GUILD_INFO.id + "/members/" + ctx.params.userid, {
                 headers: {
-                    "Authorization": "Bot " + BOT_SECRET
+                    "Authorization": "Bot " + "ODY3ODE4ODU4OTM2NDAxOTIx.YPmpSw.uiu-Qb51ErggtOBenUie3sRT36E"
                 }
             })
 
@@ -290,7 +288,7 @@ router
 
                 const options = {
                     headers: {
-                        "Authorization": "Bot " + BOT_SECRET,
+                        "Authorization": "Bot " + "ODY3ODE4ODU4OTM2NDAxOTIx.YPmpSw.uiu-Qb51ErggtOBenUie3sRT36E",
                         "Content-Length": "0"
                     },
                     method: "PUT",
@@ -317,7 +315,7 @@ router
                 await wait(1000)
                 fetch(DISCORD_API + roleAPI + roleID, {
                     headers: {
-                        "Authorization": "Bot " + BOT_SECRET
+                        "Authorization": "Bot " + "ODY3ODE4ODU4OTM2NDAxOTIx.YPmpSw.uiu-Qb51ErggtOBenUie3sRT36E"
                     },
                     method: "DELETE"
                 }).then(res => {
@@ -356,5 +354,5 @@ app.use(async ctx => {
     })
 })
 
-console.log(`🦕 Deno server running at http://localhost:8000/ 🦕`)
+console.log(`ðŸ¦• Deno server running at http://localhost:8000/ ðŸ¦•`)
 await app.listen({ port: 8000 }) 
