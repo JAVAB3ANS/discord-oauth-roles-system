@@ -351,7 +351,7 @@ app.use(router.allowedMethods())
 app.use(async ctx => {
     // ctx.response.headers.set("Cache-Control", "max-age=604800")
     await send(ctx, ctx.request.url.pathname, {
-        root: DEBUG ? `${Deno.cwd()}/static` : "/home/discord-oauth-verification-system/static",
+        root: DEBUG ? `${Deno.cwd()}/static` : "/home/discord-oauth-roles-system/static",
         index: "index.html",
     })
 })
