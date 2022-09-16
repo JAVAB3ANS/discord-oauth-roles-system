@@ -1,8 +1,8 @@
 # Discord OAuth2 Verification System
-A user-friendly web interface authenticated by Discord's REST API, authenticated with OAuth2, to assign and manage Discord roles on the Santa Clara University Discord Network.
+A user-friendly web interface authenticated with OAuth2 enabling users to assign and manage their Discord roles on the Santa Clara University Discord Network.
 
 - Utilizes Discord's v6 HTTPS/REST API.
-- Back-end REST API written in Typescript, using Deno server and oak.
+- Back-end REST API written in TypeScript, using Deno server and oak.
 - Front-end client written in HTML5, CSS, and JavaScript. Uses jQuery, Bootstrap, Popper, and Google Fonts.
 - Accompanied with the [Santa Clara University Discord bot](https://github.com/JAVAB3ANS/scu-discord-bot).
 
