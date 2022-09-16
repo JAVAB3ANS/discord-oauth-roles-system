@@ -1,5 +1,5 @@
-# Discord OAuth2 Verification System
-A user-friendly web interface authenticated with OAuth2 enabling users to assign and manage their Discord roles on the Santa Clara University Discord Network.
+# Discord OAuth2 Roles System
+A user-friendly web interface authenticated with OAuth2 assign and manage Discord roles on the Santa Clara University Discord Network.
 
 - Utilizes Discord's v6 HTTPS/REST API.
 - Back-end REST API written in TypeScript, using Deno server and oak.
