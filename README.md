@@ -3,7 +3,7 @@ A user-friendly web interface authenticated with OAuth2 to assign and manage Dis
 
 - Utilizes Discord's v6 HTTPS/REST API.
 - Back-end REST API written in TypeScript, using Deno server and oak.
-- Front-end client written in HTML5, CSS, and JavaScript. Uses jQuery, Bootstrap, Popper, and Google Fonts.
+- Front-end client written in HTML5, CSS, and JavaScript without additional dependencies.
 
 ## Login Page
 ![Login](login.png)
