@@ -1,23 +1,10 @@
-:root{
-    /* Colors are from light to dark */
-    --scuBaseColor0:#cb1f21;
-    --scuBaseColor1:#b30738;
-    --scuBaseColor2:#862633;
-
-    --black0:rgb(50, 50, 50);
-    --black1:rgb(40, 40, 40);
-    --black2:rgb(35, 35, 35);
-    --black3:rgb(30, 30, 30);
-
-    --gray0:rgb(100, 100, 100);
-    --gray1:rgb(70, 70, 70);
-}
+/* Import nessasary theme */
+@import './theme/scu.css';
 
 body {
-    color: #DDD;
-    background-color: var(--black2);
-    /* font-family: Helvetica, arial, sans-serif; */
-    font-family: 'Montserrat', sans-serif;
+    color: var(--textColor);
+    background-color: var(--system2);
+    font-family: var(--fontFamily);
 
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -30,20 +17,20 @@ body {
     padding-bottom: env(safe-area-inset-bottom);
 }
 
-/* h1, h2, h3, h4, h5, h6 {
-    font-family: 'Alata', sans-serif;
-} */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--headingFontFamily);
+}
 
 
 .borderBottomTitle{
-    border-bottom: 1px solid var(--black0);
+    border-bottom: 1px solid var(--system0);
     width: fit-content;
     padding-bottom:0.2em
 }
 
 hr{
     border-radius: 10px;
-    border: 1px solid var(--black0);
+    border: 1px solid var(--system0);
 }
 
 .logoContainer h2{font-size:1.2em}
@@ -55,14 +42,14 @@ header{
     justify-content: space-between;
 }
 
-p{color: var(--gray0);}
-a{color: var(--gray0);}
+p{color: var(--baseColor0);}
+a{color: var(--baseColor0);}
 
 .container {
     border-radius: 10px;
-    border: 2px solid var(--black0);
-    background-color:var(--black1);
-    box-shadow:0px 1px 15px var(--black3);
+    border: 2px solid var(--system0);
+    background-color:var(--system1);
+    box-shadow:0px 1px 15px var(--system3);
     padding: 1em;
 }
 .flexCenter{
@@ -79,15 +66,15 @@ a{color: var(--gray0);}
     gap: 1em;
 }
 
-.scuRedButton{
-    color: #fff;
-    background-color: var(--scuBaseColor1);
-    border: 1px solid var(--scuBaseColor3);
+.accentColorButton{
+    color: var(--buttonTextColor0);
+    background-color: var(--accentColor1);
+    border: 1px solid var(--accentColor3);
 }
 .grayButton{
-    color: #fff;
-    background-color: var(--gray1);
-    border: 1px solid var(--black1);
+    color: var(--buttonTextColor1);
+    background-color: var(--baseColor1);
+    border: 1px solid var(--system1);
 }
 
 button{
@@ -101,7 +88,7 @@ button{
     font-size: 0.8em;
     gap: 0.5em;
     text-decoration: none;
-    box-shadow:0px 5px 5px var(--black2);
+    box-shadow:0px 5px 5px var(--system2);
     transition:0.2s;
 }
 
@@ -113,26 +100,25 @@ button{
     align-items: center;
     justify-content: center;
     gap: 0.5em;
-    background-color: var(--scuBaseColor1);
-    color: #fff;
+    background-color: var(--accentColor1);
+    color: var(--buttonTextColor0);
     text-decoration: none;
-    border: 1px solid var(--scuBaseColor3);
-    box-shadow:0px 5px 5px var(--black2);
+    border: 1px solid var(--accentColor3);
+    box-shadow:0px 5px 5px var(--system2);
     transition:0.2s;
 }
 
 button:hover,
 .buttonLink:hover{
     transform: translateY(-2px);
-    box-shadow:0px 5px 5px var(--black3);
+    box-shadow:0px 5px 5px var(--system3);
 }
 
-
 .alertBanner{
-    color: #fff;
-    background-color: var(--scuBaseColor1);
-    border: 2px solid var(--scuBaseColor1);
-    box-shadow: 0px 2px 10px var(--black3);
+    color: var(--buttonTextColor0);
+    background-color: var(--accentColor1);
+    border: 2px solid var(--accentColor1);
+    box-shadow: 0px 2px 10px var(--system3);
     padding: 1em;
     border-radius:7px;
 }
@@ -180,8 +166,8 @@ button:hover,
     width: fit-content;
     gap: 0.5em;
     padding: 0.5em 0.8em;
-    /* background-color: var(--black1);
-    border: 2px solid var(--black0); */
+    /* background-color: var(--system1);
+    border: 2px solid var(--system0); */
     border-radius: 10px;
 }
 #user-block:hover {
@@ -193,8 +179,7 @@ button:hover,
 }
 .loadingContainer,details{
     border-radius: 10px;
-    background-color:var(--black0);
-    /* box-shadow:0px 1px 15px var(--black3); */
+    background-color:var(--system0);
     padding: 1em;
     margin-bottom: 0.5em;
 }

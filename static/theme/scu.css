@@ -1,0 +1,21 @@
+:root{
+  /* Colors are from light to dark */
+  --accentColor0:#cb1f21;
+  --accentColor1:#b30738;
+  --accentColor2:#862633;
+
+  --system0:rgb(50, 50, 50);
+  --system1:rgb(40, 40, 40);
+  --system2:rgb(35, 35, 35);
+  --system3:rgb(30, 30, 30);
+
+  --baseColor0:rgb(100, 100, 100);
+  --baseColor1:rgb(70, 70, 70);
+
+  /* Text Properties*/
+  --textColor:#DDD;
+  --buttonTextColor0:#fff;
+  --buttonTextColor1:#fff;
+  --fontFamily:'Montserrat', sans-serif;
+  --headingFontFamily:var(--fontFamily);
+}
