@@ -1,3 +1,5 @@
+const organizationEmblem = "./discord-small.webp";
+
 async function getUserInfo() {
     console.log("Getting user info.")
     let response = await fetch("/identity", {
@@ -193,8 +195,8 @@ window.onload = async function() {
 
     // Set identity details
     document.getElementById("username").innerText = userInfo.username + "#" + userInfo.discriminator
-    document.getElementById("avatar-icon").setAttribute("src", userImageURL !== "null" ? userImageURL : "./discord-small.webp")
-    document.getElementById("guild-icon").setAttribute("src", "./discord-small.webp")
+    document.getElementById("avatar-icon").setAttribute("src", userImageURL !== "null" ? userImageURL : organizationEmblem)
+    document.getElementById("guild-icon").setAttribute("src", organizationEmblem)
 
     // Render roles
     generateCurrentRoles(globalRoleMap.currentRoles)
