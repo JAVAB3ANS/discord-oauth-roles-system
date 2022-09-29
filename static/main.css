@@ -1,5 +1,28 @@
 /* Import nessasary theme */
-@import './theme/scu.css';
+@import './theme/dark.css';
+
+/* Light Theme for Toggle */
+.lightMode {
+  /* Colors are from light to dark */
+  --accentColor0:#cb1f21;
+  --accentColor1:#b30738;
+  --accentColor2:#862633;
+
+  --system0:rgb(240, 240, 240);
+  --system1:rgb(235, 235, 238);
+  --system2:rgb(225, 225, 228);
+  --system3:rgb(215, 215, 218);
+
+  --baseColor0:rgb(180, 180, 180);
+  --baseColor1:rgb(250, 250, 250);
+
+  /* Text Properties*/
+  --textColor:black;
+  --buttonTextColor0:#fff;
+  --buttonTextColor1:black;
+  --fontFamily:'Montserrat', sans-serif;
+  --headingFontFamily:var(--fontFamily);
+}
 
 body {
     color: var(--textColor);
@@ -15,6 +38,7 @@ body {
 
     /*noinspection CssInvalidFunction*/
     padding-bottom: env(safe-area-inset-bottom);
+    transition:0.2s;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -35,7 +59,7 @@ hr{
 
 .logoContainer h2{font-size:1.2em}
 
-header{
+header,footer{
     padding: 0.5em 0;
     display: flex;
     align-items: center;
@@ -185,5 +209,15 @@ button:hover,
 }
 
 summary{
+    cursor: pointer;
+}
+
+#toggle{
+    border-radius: 50px;
+    padding: 0.5em 1em;
+    font-size: 0.9em;
+    color: var(--buttonTextColor1);
+    box-shadow: 0px 0px 10px var(--system2);
+    background-color: var(--system1);
     cursor: pointer;
 }
