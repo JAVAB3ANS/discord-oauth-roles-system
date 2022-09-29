@@ -9,7 +9,8 @@ Regarding the `discord-small.webp` file, if you wanted to upload it with differe
 const organizationEmblem = <YOUR_EMBLEM_PATH_NAME>;
 ```
 
-## Theming
+## Colors
+### Themes
 The discord oauth verification system uses vanilla CSS. If you don't want to edit the layout itself you can easily change the color of the UI by using our premade themes ([visible here](https://github.com/JAVAB3ANS/discord-oauth-roles-system/tree/master/static/theme)) or just create a new css files with the following css variables:
 
 ```css
@@ -39,3 +40,8 @@ Once you chose / created you're theme, you should put it in the theme directory.
 ```css
 @import './theme/<MY_CSS_THEME_FILE>.css';
 ```
+
+### Toggle Between Themes
+You can also toggle between two of your favorite themes by simply adding the primary theme with the method mentioned above, and the second theme under the `lightMode` class seen in the top below the import of the `main.css` file. Although the class is labeled as `lightMode` it does not nessarily have to be a light theme (you are free to add whatever theme you like).
+
+*Note, in the case you were to add a theme combination that is not dark & light, it is advised you change the toggle button names. You can do that by simply going to the `toggle.js` file and change the 2 variable names `theme1` and `theme2` to whatever new names you desire.
